@@ -28,34 +28,38 @@ export const ProductForm = () => {
 						<label>Title</label>
 						<input
 							type="text"
+							className="entrytxt2"
 							value={Title}
 							onChange={(e) => setTitle(e.target.value)}
 						/>
 					</p>
 				</div>
-
+				<br />
 				<div className="fashion">
 					<p>
 						<label>Price</label>
 						<input
 							type="text"
+							className="entrytxt2"
 							value={Price}
 							onChange={(e) => setPrice(e.target.value)}
 						/>
 					</p>
-				</div>
-
+				</div>{" "}
+				<br />
 				<div className="fashion">
 					<p>
 						<label>Description</label>
 						<input
 							type="text"
+							className="entrytxt"
 							value={Description}
 							onChange={(e) => setDescription(e.target.value)}
 						/>
 					</p>
-				</div>
-				<input type="submit" value="Create Product" />
+				</div>{" "}
+				<br />
+				<input type="submit" value="Create Product" className="submit" />
 			</div>
 		</form>
 	);
