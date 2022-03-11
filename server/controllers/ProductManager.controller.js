@@ -16,3 +16,12 @@ module.exports.createProduct = (request, response) => {
 		.then((product) => response.json(product))
 		.catch((err) => response.json(err));
 };
+
+module.exports.showAll = (request, response) => {
+	Product.find(request.body)
+		.then((allProducts) => {
+			console.log(allProducts);
+			response.json(allProducts);
+		})
+		.catch((err) => response.json(err));
+};

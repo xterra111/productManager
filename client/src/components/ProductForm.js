@@ -21,46 +21,51 @@ export const ProductForm = () => {
 		setDescription("");
 	};
 	return (
-		<form onSubmit={onCreateHandler}>
-			<div className="main">
-				<div className="fashion">
-					<p>
-						<label>Title</label>
-						<input
-							type="text"
-							className="entrytxt2"
-							value={Title}
-							onChange={(e) => setTitle(e.target.value)}
-						/>
-					</p>
+		<div>
+			<form onSubmit={onCreateHandler}>
+				<div className="main">
+					<div className="fashion">
+						<p>
+							<label>Title</label>
+							<input
+								type="text"
+								className="entrytxt2"
+								value={Title}
+								onChange={(e) => setTitle(e.target.value)}
+							/>
+						</p>
+					</div>
+					<br />
+					<div className="fashion">
+						<p>
+							<label>Price</label>
+							<input
+								type="text"
+								className="entrytxt2"
+								value={Price}
+								onChange={(e) => setPrice(e.target.value)}
+							/>
+						</p>
+					</div>{" "}
+					<br />
+					<div className="fashion">
+						<p>
+							<label>Description</label>
+							<input
+								type="text"
+								className="entrytxt"
+								value={Description}
+								onChange={(e) => setDescription(e.target.value)}
+							/>
+						</p>
+					</div>{" "}
+					<br />
+					<input type="submit" value="Create Product" className="submit" />
 				</div>
-				<br />
-				<div className="fashion">
-					<p>
-						<label>Price</label>
-						<input
-							type="text"
-							className="entrytxt2"
-							value={Price}
-							onChange={(e) => setPrice(e.target.value)}
-						/>
-					</p>
-				</div>{" "}
-				<br />
-				<div className="fashion">
-					<p>
-						<label>Description</label>
-						<input
-							type="text"
-							className="entrytxt"
-							value={Description}
-							onChange={(e) => setDescription(e.target.value)}
-						/>
-					</p>
-				</div>{" "}
-				<br />
-				<input type="submit" value="Create Product" className="submit" />
+			</form>
+			<div>
+				<hr></hr>
 			</div>
-		</form>
+		</div>
 	);
 };
