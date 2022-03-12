@@ -1,11 +1,11 @@
 import "./App.css";
 import React from "react";
-import { ProductForm } from "./components/ProductForm";
+import { Main } from "./views/Main";
 
 function App() {
 	return (
 		<div className="App">
-			<ProductForm />
+			<Main />
 		</div>
 	);
 }

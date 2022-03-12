@@ -1,24 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
-export const ProductForm = () => {
+const ProductForm = (props) => {
 	const [Title, setTitle] = useState("");
 	const [Price, setPrice] = useState("");
 	const [Description, setDescription] = useState("");
 
-	const [listAllProducts, setListAllProducts] = useState("");
-
-	useEffect(() => {
-		axios
-			.get("http://localhost:8000/api/listAllProducts")
-			.then((res) => {
-				console.log(res.data);
-				setListAllProducts(res.data);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	}, [listAllProducts]);
+	const { listAllProducts, setListAllProducts } = props;
 
 	const onCreateHandler = (e) => {
 		e.preventDefault();
@@ -28,11 +16,15 @@ export const ProductForm = () => {
 				Price,
 				Description,
 			})
-			.then((res) => console.log(res.data))
+			.then((res) => {
+				setListAllProducts([...listAllProducts, res.data]);
+				setTitle("");
+				setPrice("");
+				setDescription("");
+				console.log(res.data);
+			})
+
 			.catch((err) => console.log(err));
-		setTitle("");
-		setPrice("");
-		setDescription("");
 	};
 	return (
 		<form onSubmit={onCreateHandler}>
@@ -71,21 +63,13 @@ export const ProductForm = () => {
 							onChange={(e) => setDescription(e.target.value)}
 						/>
 					</p>
-				</div>{" "}
+				</div>
 				<br />
 				<input type="submit" value="Create Product" className="submit" />
-				<div>
-					<br />
-					<hr></hr>
-					<div>
-						<p>ProductName:</p>
-
-						{listAllProducts.map((listAll, index) => (
-							<li key={index}>{listAll.Title}</li>
-						))}
-					</div>
-				</div>
+				<br />
+				<hr></hr>
 			</div>
 		</form>
 	);
 };
+export default ProductForm;

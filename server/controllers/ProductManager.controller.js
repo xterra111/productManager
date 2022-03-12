@@ -20,7 +20,6 @@ module.exports.createProduct = (request, response) => {
 module.exports.showAll = (request, response) => {
 	Product.find(request.body)
 		.then((allProducts) => {
-			console.log(allProducts);
 			response.json(allProducts);
 		})
 		.catch((err) => response.json(err));
