@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link, useParams } from "react-router-dom";
 
 const DisplayAll = (props) => {
 	const { listAllProducts, setListAllProducts } = props;
@@ -16,9 +17,11 @@ const DisplayAll = (props) => {
 	}, []);
 	return (
 		<div>
-			<header>All Available Products</header>
+			<h1>All Available Products</h1>
 			{listAllProducts.map((listAll, index) => (
-				<div key={index}>{listAll.Title}</div>
+				<div key={index}>
+					<Link to={`/${listAll._id}`}>{listAll.Title}</Link>
+				</div>
 			))}
 		</div>
 	);

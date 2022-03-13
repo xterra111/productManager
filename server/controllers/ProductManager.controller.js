@@ -24,3 +24,10 @@ module.exports.showAll = (request, response) => {
 		})
 		.catch((err) => response.json(err));
 };
+module.exports.productDetails = (request, response) => {
+	Product.findOne({ _id: request.params.id })
+		.then((productDetails) => {
+			response.json(productDetails);
+		})
+		.catch((err) => response.json(err));
+};
