@@ -28,6 +28,15 @@ const ProductForm = (props) => {
 	};
 	return (
 		<form onSubmit={onCreateHandler}>
+			{/* Tried refactoring spending too much time. moving on... */}
+			{/* <Form
+				listAllProducts={listAllProducts}
+				setListAllProducts={setListAllProducts}
+			/> */}
+
+			{/* <Form /> */}
+
+			{/* OLD CODE BEFORE REFACTORING */}
 			<div className="main">
 				<div className="fashion">
 					<p>
@@ -65,10 +74,11 @@ const ProductForm = (props) => {
 					</p>
 				</div>
 				<br />
-				<input type="submit" value="Create Product" className="submit" />
-				<br />
-				<hr></hr>
 			</div>
+
+			<input type="submit" value="Create Product" className="submit" />
+			<br />
+			<hr></hr>
 		</form>
 	);
 };
