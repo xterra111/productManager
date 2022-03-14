@@ -1,10 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const ProductDetails = (props) => {
 	const { id } = useParams();
 	const [productDetails, setProductDetails] = useState({});
+	const navigate = useNavigate();
+
+	const onDeleteDetail = (idFromBelow) => {
+		//e.preventDefault();
+		axios
+			.delete(`http://localhost:8000/api/${idFromBelow}`)
+			.then((res) => {
+				console.log(res.data);
+				navigate("/");
+			})
+
+			.catch((err) => console.log(err));
+	};
 
 	useEffect(() => {
 		axios
@@ -22,6 +35,8 @@ const ProductDetails = (props) => {
 			<p>Title: {productDetails.Title}</p>
 			<p>Price: {productDetails.Price}</p>
 			<p>Title: {productDetails.Description}</p>
+			<br />
+			<button onClick={() => onDeleteDetail(id)}>Delete</button>
 		</div>
 	);
 };
