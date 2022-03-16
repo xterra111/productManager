@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import DeleteButton from "./DeleteButton";
 
 const DisplayAll = (props) => {
 	const { removeFromDom, listAllProducts, setListAllProducts } = props;
@@ -43,7 +44,12 @@ const DisplayAll = (props) => {
 						<Link to={`/${listAll._id}`}>{listAll.Title}</Link>
 					</div>
 					<div>
-						<button onClick={() => onDeleteHandler(listAll._id)}>Delete</button>
+						{/* <button onClick={() => onDeleteHandler(listAll._id)}>Delete</button> */}
+
+						<DeleteButton
+							listAllID={listAll._id}
+							successCallBack={() => removeFromDom(listAll._id)}
+						/>
 					</div>
 				</div>
 			))}
