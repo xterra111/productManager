@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 
 const DisplayAll = (props) => {
-	const { listAllProducts, setListAllProducts } = props;
+	const { removeFromDom, listAllProducts, setListAllProducts } = props;
 	//const { id } = useParams();
 	useEffect(() => {
 		axios
@@ -23,11 +23,12 @@ const DisplayAll = (props) => {
 			.delete(`http://localhost:8000/api/${idFromBelow}`)
 			.then((res) => {
 				console.log(res.data);
-				setListAllProducts(
-					listAllProducts.filter(
-						(listAll, index) => listAll._id !== idFromBelow
-					)
-				);
+				// setListAllProducts(
+				// listAllProducts.filter(
+				// (listAll, index) => listAll._id !== idFromBelow
+				// )
+				// );
+				removeFromDom(idFromBelow);
 			})
 
 			.catch((err) => console.log(err));

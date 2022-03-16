@@ -7,7 +7,11 @@ export const Main = (props) => {
 	//const [setTitle] = props;
 
 	const [listAllProducts, setListAllProducts] = useState([]);
-
+	const removeFromDom = (listAllid) => {
+		setListAllProducts(
+			listAllProducts.filter((listAll) => listAll._id !== listAllid)
+		);
+	};
 	return (
 		<div>
 			{/* <Form
@@ -23,6 +27,7 @@ export const Main = (props) => {
 			<DisplayAll
 				listAllProducts={listAllProducts}
 				setListAllProducts={setListAllProducts}
+				removeFromDom={removeFromDom}
 			/>
 		</div>
 	);
