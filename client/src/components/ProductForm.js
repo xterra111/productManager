@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const ProductForm = (props) => {
@@ -8,14 +8,12 @@ const ProductForm = (props) => {
 
 	const {
 		onSubmitProp,
-		//listAllProducts,
-		//setListAllProducts,
+
 		initTitle,
-		//setTitle,
+
 		initPrice,
-		//setPrice,
+
 		initDescription,
-		//setDescription,
 	} = props;
 
 	const [Title, setTitle] = useState(initTitle);
@@ -89,7 +87,7 @@ const ProductForm = (props) => {
 							onChange={(e) => setPrice(e.target.value)}
 						/>
 					</p>
-				</div>{" "}
+				</div>
 				<br />
 				<div className="fashion">
 					<p>
@@ -106,7 +104,7 @@ const ProductForm = (props) => {
 			</div>
 
 			{/* <input type="submit" value="Create Product" className="submit" /> */}
-			<input type="submit" value="Submit" className="submit" />
+			<input type="submit" />
 			<br />
 			<hr></hr>
 		</form>

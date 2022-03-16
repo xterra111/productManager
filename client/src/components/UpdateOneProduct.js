@@ -14,6 +14,16 @@ const UpdateOneProduct = (props) => {
 	// 	//setDescription,
 	// } = useParams();
 
+	// const {
+	// 	onSubmitProp,
+
+	// 	initTitle,
+
+	// 	initPrice,
+
+	// 	initDescription,
+	// } = props;
+
 	const { id } = useParams();
 
 	// const [Title, setTitle] = useState("");
@@ -22,6 +32,7 @@ const UpdateOneProduct = (props) => {
 	//const [setTitle, setPrice, setDescription] = useState("");
 	//const { listAllProducts, setListAllProducts } = props;
 	const [productDetails, setProductDetails] = useState({});
+	const [loaded, setLoaded] = useState(false);
 	//const [prod, setProd] = useState();
 
 	useEffect(() => {
@@ -30,20 +41,22 @@ const UpdateOneProduct = (props) => {
 			.then((res) => {
 				console.log(res.data);
 				setProductDetails(res.data);
+				setLoaded(true);
 
-				// setTitle(res.data.Title);
-				// setPrice(res.data.Price);
-				// setDescription(res.data.Description);
+				// initTitle(res.data.Title);
+				// initPrice(res.data.Price);
+				// initDescription(res.data.Description);
 			})
 			.catch((err) => {
 				console.log(err);
 			});
 	}, [id]);
 
-	const onUpdateHandler = () => {
+	const onUpdateHandler = (updateProd) => {
 		//e.preventDefault();
 		axios
-			.put("http://localhost:8000/api/edit/" + id, productDetails)
+			.put("http://localhost:8000/api/edit/" + id, updateProd)
+			// productDetails
 			.then((res) => {
 				//setListAllProducts([...listAllProducts, res.data]);
 				// setTitle("");
@@ -109,15 +122,14 @@ const UpdateOneProduct = (props) => {
 
 				<input type="submit" value="Update Product" className="submit" /> 
             </form> */}
-			<ProductForm
-				onSubmitProp={onUpdateHandler}
-				// initTitle={productDetails.Title}
-				// initPrice={productDetails.Price}
-				// initDescription={productDetails.Description}
-				initTitle={productDetails.Title}
-				initPrice={productDetails.Price}
-				initDescription={productDetails.Description}
-			/>
+			{loaded ? (
+				<ProductForm
+					onSubmitProp={onUpdateHandler}
+					initTitle={productDetails.Title}
+					initPrice={productDetails.Price}
+					initDescription={productDetails.Description}
+				/>
+			) : null}
 		</div>
 	);
 };
