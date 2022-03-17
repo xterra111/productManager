@@ -1,26 +1,64 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import ProductForm from "./ProductForm";
 
 const UpdateOneProduct = (props) => {
+	// const {
+	// 	id,
+	// 	//Title,
+	// 	//setTitle,
+	// 	//Price,
+	// 	//setPrice,
+	// 	//Description,
+	// 	//setDescription,
+	// } = useParams();
+
+	// const {
+	// 	onSubmitProp,
+
+	// 	initTitle,
+
+	// 	initPrice,
+
+	// 	initDescription,
+	// } = props;
+
 	const { id } = useParams();
 
-	const [Title, setTitle] = useState("");
-	const [Price, setPrice] = useState("");
-	const [Description, setDescription] = useState("");
-	const { listAllProducts, setListAllProducts } = props;
+	// const [Title, setTitle] = useState("");
+	// const [Price, setPrice] = useState("");
+	// const [Description, setDescription] = useState("");
+	//const [setTitle, setPrice, setDescription] = useState("");
+	//const { listAllProducts, setListAllProducts } = props;
 	const [productDetails, setProductDetails] = useState({});
+	const [loaded, setLoaded] = useState(false);
+	//const [prod, setProd] = useState();
 
-	const onUpdateHandler = (e) => {
-		e.preventDefault();
+	useEffect(() => {
 		axios
-			.put(`http://localhost:8000/api/edit/${id}`, {
-				Title,
-				Price,
-				Description,
-			})
+			.get("http://localhost:8000/api/productDetails/" + id)
 			.then((res) => {
-				setListAllProducts([...listAllProducts, res.data]);
+				console.log(res.data);
+				setProductDetails(res.data);
+				setLoaded(true);
+
+				// initTitle(res.data.Title);
+				// initPrice(res.data.Price);
+				// initDescription(res.data.Description);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, [id]);
+
+	const onUpdateHandler = (updateProd) => {
+		//e.preventDefault();
+		axios
+			.put("http://localhost:8000/api/edit/" + id, updateProd)
+			// productDetails
+			.then((res) => {
+				//setListAllProducts([...listAllProducts, res.data]);
 				// setTitle("");
 				// // setProductDetails.Title({ productDetails });
 				// setPrice("");
@@ -31,24 +69,9 @@ const UpdateOneProduct = (props) => {
 			.catch((err) => console.log(err));
 	};
 
-	useEffect(() => {
-		axios
-			.get(`http://localhost:8000/api/productDetails/${id}`)
-			.then((res) => {
-				console.log(res.data);
-				setProductDetails(res.data);
-				setTitle(res.data.Title);
-				setPrice(res.data.Price);
-				setDescription(res.data.Description);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	}, [id]);
-
 	return (
 		<div>
-			<form onSubmit={onUpdateHandler}>
+			{/* <form onSubmit={onUpdateHandler}>
 				<div className="main">
 					<div className="fashion">
 						<p>
@@ -97,10 +120,16 @@ const UpdateOneProduct = (props) => {
 					<br />
 				</div>
 
-				<input type="submit" value="Update Product" className="submit" />
-				<br />
-				<hr></hr>
-			</form>
+				<input type="submit" value="Update Product" className="submit" /> 
+            </form> */}
+			{loaded ? (
+				<ProductForm
+					onSubmitProp={onUpdateHandler}
+					initTitle={productDetails.Title}
+					initPrice={productDetails.Price}
+					initDescription={productDetails.Description}
+				/>
+			) : null}
 		</div>
 	);
 };
